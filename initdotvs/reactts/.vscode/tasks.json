@@ -4,7 +4,7 @@
     {
       "label": "Create Component Here",
       "type": "shell",
-      "command": "createcomp --react --js",
+      "command": "createcomp --react --ts",
       "options": {
         "cwd": "${workspaceFolder}"
       },
