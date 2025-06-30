@@ -74,17 +74,36 @@ end
 
 
 function initvs
-    set option $argv[1]
+    set first $argv[1]
+    set second $argv[2]
 
-    switch $option
+    switch $first
         case --vite
             echo "🚀 Создание Vite-проекта в текущей директории..."
             npm create vite@latest
+
+        case --react
+            switch $second
+                case --ts
+                    set script_path "$HOME/scripts/initvs/react/ts/init-react-ts.sh"
+                    if test -x $script_path
+                        echo "⚙️ Запуск инициализации React + TypeScript..."
+                        $script_path
+                    else
+                        echo "❌ Скрипт $script_path не найден или не исполняемый"
+                    end
+                case '*'
+                    echo "❗ Уточни язык: --ts (поддерживается только TypeScript)"
+            end
+
         case '*'
-            echo "❌ Неизвестный флаг: $option"
-            echo "Использование: initvs --vite"
+            echo "❌ Неизвестный флаг: $first"
+            echo "📌 Использование:"
+            echo "  initvs --vite"
+            echo "  initvs --react --ts"
     end
 end
+
 
 echo "✅ Установка"
 funcsave initvs
